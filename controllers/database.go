@@ -1,10 +1,11 @@
-package models
+package controllers
 
 import (
 	// "gorm.io/driver/mysql"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	log "github.com/sirupsen/logrus"
+	"mailrelay/models"
 )
 
 var (
@@ -30,15 +31,15 @@ func local(path string) *gorm.DB {
 
 func migrate(db gorm.DB) {
 	db.AutoMigrate(
-		&Address{},
-		&List{},
-		&Mail{},
-		&Permission{},
+		&models.Address{},
+		&models.List{},
+		&models.Mail{},
+		&models.Permission{},
 	)
 	log.Info("Database migration sucessful.")
 }
 
-func ConnectDatabase(config DatabaseConfig) {
+func ConnectDatabase(config models.DatabaseConfig) {
 	if (config.Sqlite == "") {
 		log.Fatal("No database path provided.")
 	}

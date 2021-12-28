@@ -9,7 +9,6 @@ type Mail struct {
 	CreatedAt	time.Time
 	FromID		uint		`gorm:"foreignKey:AddressID"`
 	From		Address
-	ToId		uint		`gorm:"foreignKey:AddressId"`
-	To			Address
+	To			[]Address	`gorm:"many2many:mail_addresses"`
 	Allowed		bool
 }

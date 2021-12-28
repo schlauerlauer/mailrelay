@@ -1,26 +1,25 @@
 package main
 
 import (
-	"fmt"
-	"mailrelay/models"
 	log "github.com/sirupsen/logrus"
+	ctl "mailrelay/controllers"
 )
 
 var (
-	cfg = NewConfig("./config.yaml")
+	cfg = ctl.NewConfig("./config.yaml")
 )
 
 func init() {
 	log.SetLevel(log.DebugLevel)
 	log.Print("Log level ", log.GetLevel(), ".")
-	CheckEmptyString(cfg.Server.Port, "api port")
-	CheckEmptyString(cfg.Mail.Server, "mail server")
-	CheckEmptyString(cfg.Mail.Address, "mail address")
-	CheckEmptyString(cfg.Mail.Password, "mail password")
-	CheckEmptyString(fmt.Sprint(cfg.Mail.Port), "mail port")
+	ctl.CheckEmptyString(cfg.Server.Port, "api port")
+	ctl.CheckEmptyString(cfg.Mail.Server, "mail server")
+	ctl.CheckEmptyString(cfg.Mail.Address, "mail address")
+	ctl.CheckEmptyString(cfg.Mail.Password, "mail password")
+	ctl.CheckEmptyInt(cfg.Mail.Port, "mail port")
 }
 
 func main() {
-	models.ConnectDatabase(cfg.Database)
-	GetMail()
+	ctl.ConnectDatabase(cfg.Database)
+	ctl.GetMail(*cfg)
 }

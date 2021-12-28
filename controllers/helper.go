@@ -1,4 +1,4 @@
-package main
+package controllers
 
 import (
 	log "github.com/sirupsen/logrus"
@@ -9,17 +9,13 @@ import (
 
 func CheckEmptyString(checkThis string, description string) {
 	if checkThis == "" {
-		log.WithFields(log.Fields{
-			"field": description,
-		  }).Fatal("Needed config field is empty.")
+		log.WithField("field", description).Fatal("Needed config field is empty.")
 	}
 }
 
 func CheckEmptyInt(checkThis uint, description string) {
 	if checkThis == 0 {
-		log.WithFields(log.Fields{
-			"field": description,
-		}).Fatal("Needed config field is empty.")
+		log.WithField("field", description).Fatal("Needed config field is empty.")
 	}
 }
 
