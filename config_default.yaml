@@ -1,0 +1,9 @@
+server:
+  port: "8080"
+database:
+  sqlite: ./sqlite.db
+mail:
+  server: example.com
+  port: 993
+  address: mail@example.com
+  password: "abcde"
